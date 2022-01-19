@@ -12,15 +12,15 @@ export default function CarouselCard(props) {
         <img alt={title} src={src} />
       </Link>
 
-      <div>
+      <article>
         <h2>{title}</h2>
         <h3>{subtitle}</h3>
         <hr />
         <Link to={url}>
           바로가기
-          <i class="fal fa-chevron-right" />
+          <i className="fal fa-chevron-right" />
         </Link>
-      </div>
+      </article>
     </CarouselCardWrapper>
   );
 }
@@ -37,10 +37,10 @@ const CarouselCardWrapper = styled(Col)`
     }
   }
 
-  div {
+  article {
     position: absolute;
+    bottom: 25px;
     left: 40px;
-    bottom: 35px;
 
     display: flex;
     flex-direction: column;
@@ -59,7 +59,7 @@ const CarouselCardWrapper = styled(Col)`
     }
 
     h3 {
-      height: 44px;
+      height: 43px;
       margin: 0 20px;
       padding-top: 2px;
       font-size: 14px;
@@ -76,7 +76,7 @@ const CarouselCardWrapper = styled(Col)`
 
     a {
       width: 80px;
-      margin: 12px 0 0 12px;
+      margin: 12px 0 12px 12px;
       padding: 6px 8px;
       color: #3366ff;
       font-size: 14px;
