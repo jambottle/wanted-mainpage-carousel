@@ -1,7 +1,11 @@
 import React from 'react';
+import { Container } from 'styled-bootstrap-grid';
+import Carousel from '../components/Carousel/Carousel';
 
-function Main() {
-  return <>Main</>;
+export default function Main() {
+  return (
+    <Container>
+      <Carousel />
+    </Container>
+  );
 }
-
-export default Main;
