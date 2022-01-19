@@ -3,29 +3,47 @@ import styled from 'styled-components';
 import CarouselCard from './CarouselCard';
 import CARD_LIST_DATA from './carouselData';
 
-const AUTO_TRANSITION_DURATION = 4000;
-const SELF_TRANSITION_DURATION = 1000;
+const AUTO_TRANSITION_DURATION = 3500;
+const SELF_TRANSITION_DURATION = 500;
 
 export default function InfiniteCarousel() {
   const [prevIndex, setPrevIndex] = useState(1);
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
+  const [shouldTransition, setShouldTransition] = useState(true);
 
   const slideLeft = () => {
+    if (isButtonClicked || !shouldTransition) return;
+
+    setIsButtonClicked(true);
+    setTimeout(() => {
+      setIsButtonClicked(false);
+    }, SELF_TRANSITION_DURATION);
+
     const nextIndex = prevIndex - 1;
     setPrevIndex(nextIndex);
 
     if (nextIndex === 0) {
       setTimeout(() => {
+        setShouldTransition(false);
         setPrevIndex(CARD_LIST_DATA.length);
       }, SELF_TRANSITION_DURATION);
     }
   };
 
   const slideRight = () => {
+    if (isButtonClicked || !shouldTransition) return;
+
+    setIsButtonClicked(true);
+    setTimeout(() => {
+      setIsButtonClicked(false);
+    }, SELF_TRANSITION_DURATION);
+
     const nextIndex = prevIndex + 1;
     setPrevIndex(nextIndex);
 
     if (nextIndex === CARD_LIST_DATA.length + 1) {
       setTimeout(() => {
+        setShouldTransition(false);
         setPrevIndex(1);
       }, SELF_TRANSITION_DURATION);
     }
@@ -37,14 +55,26 @@ export default function InfiniteCarousel() {
       slideRight();
     }, AUTO_TRANSITION_DURATION);
     return () => clearInterval(interval);
-  }, [prevIndex]);
+  });
+
+  useEffect(() => {
+    console.log(shouldTransition);
+    if (shouldTransition) return;
+
+    const timeout = setTimeout(() => {
+      setShouldTransition(true);
+    }, SELF_TRANSITION_DURATION);
+    return () => clearTimeout(timeout);
+  }, [shouldTransition]);
 
   return (
     <CarouselWrapper>
       <CarouselCardList
         style={{
           transform: `translateX(-${prevIndex * 100}%)`,
-          transition: `all ${SELF_TRANSITION_DURATION}ms ease-in-out`,
+          transition: shouldTransition
+            ? `all ${SELF_TRANSITION_DURATION}ms ease-in-out`
+            : 'none',
         }}
       >
         <CarouselCard data={CARD_LIST_DATA[CARD_LIST_DATA.length - 1]} />
