@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSwipeable } from 'react-swipeable';
 import styled from 'styled-components';
 import CarouselCard from './CarouselCard';
 import CARD_LIST_DATA from './carouselData';
@@ -49,6 +50,13 @@ export default function InfiniteCarousel() {
     }
   };
 
+  const handlers = useSwipeable({
+    onSwipedLeft: () => slideRight(),
+    onSwipedRight: () => slideLeft(),
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true,
+  });
+
   useEffect(() => {
     console.log(prevIndex);
     const interval = setInterval(() => {
@@ -68,29 +76,31 @@ export default function InfiniteCarousel() {
   }, [shouldTransition]);
 
   return (
-    <CarouselWrapper>
-      <CarouselCardList
-        style={{
-          transform: `translateX(-${prevIndex * 100}%)`,
-          transition: shouldTransition
-            ? `all ${SELF_TRANSITION_DURATION}ms ease-in-out`
-            : 'none',
-        }}
-      >
-        <CarouselCard data={CARD_LIST_DATA[CARD_LIST_DATA.length - 1]} />
-        {CARD_LIST_DATA.map((data, index) => {
-          return <CarouselCard key={index} data={data} />;
-        })}
-        <CarouselCard data={CARD_LIST_DATA[0]} />
-      </CarouselCardList>
+    <div {...handlers}>
+      <CarouselWrapper>
+        <CarouselCardList
+          style={{
+            transform: `translateX(-${prevIndex * 100}%)`,
+            transition: shouldTransition
+              ? `all ${SELF_TRANSITION_DURATION}ms ease-in-out`
+              : 'none',
+          }}
+        >
+          <CarouselCard data={CARD_LIST_DATA[CARD_LIST_DATA.length - 1]} />
+          {CARD_LIST_DATA.map((data, index) => {
+            return <CarouselCard key={index} data={data} />;
+          })}
+          <CarouselCard data={CARD_LIST_DATA[0]} />
+        </CarouselCardList>
 
-      <button className="leftButton" onClick={slideLeft}>
-        <i className="fal fa-chevron-left" />
-      </button>
-      <button className="rightButton" onClick={slideRight}>
-        <i className="fal fa-chevron-right" />
-      </button>
-    </CarouselWrapper>
+        <button className="leftButton" onClick={slideLeft}>
+          <i className="fal fa-chevron-left" />
+        </button>
+        <button className="rightButton" onClick={slideRight}>
+          <i className="fal fa-chevron-right" />
+        </button>
+      </CarouselWrapper>
+    </div>
   );
 }
 
