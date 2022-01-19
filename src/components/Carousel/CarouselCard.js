@@ -3,21 +3,20 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Col } from 'styled-bootstrap-grid';
 
-export default function CarouselCard() {
+export default function CarouselCard(props) {
+  const { title, subtitle, url, src } = props.data;
+
   return (
     <CarouselCardWrapper col={12}>
-      <Link to="/events/pre_onboarding_course_6">
-        <img
-          alt="개발자 되고싶은 분들!?"
-          src="https://static.wanted.co.kr/images/banners/1473/41f7b36e.jpg"
-        />
+      <Link to={url}>
+        <img alt={title} src={src} />
       </Link>
 
       <div>
-        <h2>개발자 되고싶은 분들!?</h2>
-        <h3>프론트엔드 무료 교육과정 참여하기</h3>
+        <h2>{title}</h2>
+        <h3>{subtitle}</h3>
         <hr />
-        <Link to="/events/pre_onboarding_course_6">
+        <Link to={url}>
           바로가기
           <i class="fal fa-chevron-right" />
         </Link>
@@ -76,6 +75,7 @@ const CarouselCardWrapper = styled(Col)`
     }
 
     a {
+      width: 80px;
       margin: 12px 0 0 12px;
       padding: 6px 8px;
       color: #3366ff;
