@@ -3,6 +3,28 @@
 > This project is deployed with Vercel and [Create React App](https://github.com/facebook/create-react-app).\
 > You can check out the project here: [wanted-onboarding-frontend.vercel.app](https://wanted-onboarding-frontend.vercel.app)
 
+## 📑 구현 기능 상세
+
+React의 함수형 컴포넌트를 적극 활용하여 프로젝트를 수행하였습니다.\
+선발 과제의 요구사항을 중심으로 세부적인 일부 기능은 자율적으로 개선하였습니다.
+
+### 1. Global Navigation Bar (`NavBar` 컴포넌트)
+
+- 상단에 고정된 Navigation Bar의 기본적인 레이아웃 문서를 작성 (마크업 위주)
+- hover했을 때에 메뉴마다 밑줄이 생기는 효과 및 새로운 소식을 표시하는 아이콘 구현
+
+### 2. Infinite Carousel (`Carousel` 컴포넌트)
+
+- 좌/우 버튼을 클릭하거나, 일정 시간이 지나면 다음 슬라이드로 이동하는 기능 구현
+- 슬라이드 이동의 기준으로 삼은 Index를 활용하여 조건부 렌더링 및 스타일링 구현
+- react-swipeable 라이브러리를 활용해 웹에서도 마우스 스와이프 이벤트를 활성화
+
+### 3. 기타
+
+- Vercel을 통해 배포하여 상기 링크를 통해 브라우저에서 구현사항 확인 가능
+- 반응형 웹 설계 및 Grid System 구현을 위해 CSS 라이브러리 및 툴킷 활용
+- API의 부재로 인해 리스트 렌더링에 필요한 정보는 Mock Data로 대체
+
 ## Available Scripts
 
 In the project directory, you can run:
