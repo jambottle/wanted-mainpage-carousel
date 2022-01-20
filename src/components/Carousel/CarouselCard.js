@@ -4,15 +4,29 @@ import { Link } from 'react-router-dom';
 import { Col } from 'styled-bootstrap-grid';
 
 export default function CarouselCard(props) {
-  const { title, subtitle, url, src } = props.data;
+  const { id, title, subtitle, url, src } = props.data;
+  const { prevIndex } = props;
 
   return (
     <CarouselCardWrapper col={12}>
-      <Link to={url}>
-        <img alt={title} src={src} />
+      <Link to={id === prevIndex ? `${url}` : ''}>
+        <img
+          alt={title}
+          src={src}
+          style={{
+            filter: `${
+              id === prevIndex ? 'brightness(100%)' : 'brightness(60%)'
+            }`,
+            cursor: id === prevIndex ? 'pointer' : 'default',
+          }}
+        />
       </Link>
 
-      <article>
+      <article
+        style={{
+          display: `${id === prevIndex ? 'flex' : 'none'}`,
+        }}
+      >
         <h2>{title}</h2>
         <h3>{subtitle}</h3>
         <hr />

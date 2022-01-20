@@ -88,7 +88,9 @@ export default function InfiniteCarousel() {
         >
           <CarouselCard data={CARD_LIST_DATA[CARD_LIST_DATA.length - 1]} />
           {CARD_LIST_DATA.map((data, index) => {
-            return <CarouselCard key={index} data={data} />;
+            return (
+              <CarouselCard key={index} data={data} prevIndex={prevIndex} />
+            );
           })}
           <CarouselCard data={CARD_LIST_DATA[0]} />
         </CarouselCardList>
@@ -120,7 +122,7 @@ const CarouselWrapper = styled.div`
     border-radius: 20px;
 
     background-color: #ebebeb;
-    opacity: 0.6;
+    opacity: 0.8;
     cursor: pointer;
 
     &.leftButton {
